@@ -41,9 +41,9 @@ class AddStudent extends React.Component {
                         placeholder="Student Grade"
                     />
                 </div>
-                <button type="button" className="btn btn-default btn-success addButton" onclick="" > Add </button>
-                <button type="button" className="btn btn-default cancelButton" onclick="" >Cancel</button>
-                <button type="button" className="btn btn-default btn-primary getServerDataButton" onclick="">Get Data From Server</button>
+                <button type="button" className="btn btn-default btn-success addButton"  > Add </button>
+                <button type="button" className="btn btn-default cancelButton"  >Cancel</button>
+                <button type="button" className="btn btn-default btn-primary getServerDataButton" >Get Data From Server</button>
             </div>
         );
     }
