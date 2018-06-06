@@ -1,3 +1,5 @@
 /node_modules
 config/mysqlCredentials.js
 mysqlCredentials.js
+mysqlCredentials.php
+php_prototype/mysqlCredentials.php
