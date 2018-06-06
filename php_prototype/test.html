@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <title>Testing PHP</title>
+</head>
+<style>
+    div {
+        display: flex;
+        justify-content: center;
+    }
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+    button {
+        display: flex;
+        justify-content: center;
+        height: 50px;
+        width: 100px;
+        background-color: blue;
+        color: white;
+        font-size: 20px;
+        display: block;
+    }
+</style>
+<body>
+    <div>
+        <h1>GET DATA HERE</h1>
+    </div>
+    <div>
+        <button>CLICK ME!!!</button>
+    </div>
+</body>
+
+<script>
+
+    $("button").click(makeAjaxCall);
+
+    function makeAjaxCall() {
+        console.log("makeAjaxCall function called");
+        $.ajax({
+            url: 'getData.php',
+            method: 'get',
+            dataType: 'json',
+            data: '',
+            success: (data) => {
+                console.log('ajax call successful')
+                console.log('data: ' , data);
+            },
+            error: (error) => {
+                console.log('ajax call unsuccessful');
+                console.log('errors: ' , error);
+            }
+        });
+    };
+
+</script>
+
+</html>
