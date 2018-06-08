@@ -33,6 +33,9 @@ if($result){
     $output['errors'][] = 'error with query';
 };
 
+// close mysql connection
+mysqli_close($connection);
+
 // encode output to json
 $json_output = json_encode($output);
 

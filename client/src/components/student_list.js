@@ -3,8 +3,31 @@ import { connect } from 'react-redux';
 import { getStudentList } from '../actions';
 
 class StudentList extends React.Component {
+    constructor ( props ) {
+        super(props);
+
+        this.getStudentData();
+    };
+
+    async getStudentData() {
+        await this.props.getStudentList();
+    }
+    
     render() {
-        console.log( "this.props.getStudentList called", this.props.getStudentList() );
+        // console.log( "this.props.getStudentList called", this.props.getStudentList() );
+
+        console.log('this.props: ' ,this.props);
+
+        const studentData = this.props.studentList.map( (item , itemIndex) => {
+            return (
+                <tr key={itemIndex}>
+                    <td>{item.full_name}</td>
+                    <td>{item.class_name}</td>
+                    <td>{item.grade_value}</td>
+                </tr>
+            )
+        });
+
 
         return (
             <div className="pull-left col-lg-8 student-list-container">
@@ -18,6 +41,7 @@ class StudentList extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
+                        {studentData}
                     </tbody>
                 </table>
                 <div className="noData">No Data to Display</div>

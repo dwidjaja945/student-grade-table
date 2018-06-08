@@ -1,4 +1,5 @@
 import types from './types';
+import axios from 'axios';
 import dummyData from '../dummydata';
 
 export function incrementCount(count) {
@@ -14,10 +15,10 @@ export function incrementCount(count) {
 export function getStudentList() {
 
     // axios call can go here
-    // const response = await axios.get( ' url ' , dataToSend )
+    const response = axios.get( '/api/get_student_data' );
 
     return {
         type: types.GET_STUDENT_LIST,
-        payload: dummyData
+        payload: response
     };
 };
