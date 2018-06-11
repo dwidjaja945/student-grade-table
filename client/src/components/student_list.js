@@ -14,8 +14,6 @@ class StudentList extends React.Component {
     }
     
     render() {
-        // console.log( "this.props.getStudentList called", this.props.getStudentList() );
-
         console.log('this.props: ' ,this.props);
 
         const studentData = this.props.studentList.map( (item , itemIndex) => {
@@ -27,7 +25,6 @@ class StudentList extends React.Component {
                 </tr>
             )
         });
-
 
         return (
             <div className="pull-left col-lg-8 student-list-container">
