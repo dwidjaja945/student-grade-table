@@ -13,6 +13,11 @@ export default ( state=DEFAULT_STATE , action ) => {
                 ...state,
                 [action.payload.name] : action.payload.value
             };
+        case types.CLEAR_INPUT:
+            return {
+                ...state,
+                [action.payload] : ""
+            }
         default:
             return state;
     }
