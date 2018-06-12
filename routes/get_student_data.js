@@ -8,26 +8,14 @@ module.exports = ( webserver , mysql , database ) => {
             errors: []
         };
 
-        // assume class_name of biology 100
-        let class_name = 'biology 100';
-
-        // let class_name = req.query.class_name;
-
         let query = `
             SELECT 
-                users.full_name,
-                classes.class_name,
-                classes.grade_value
-            FROM classes
-            JOIN users
-                ON classes.student_id = users.id
-            WHERE class_name = ?`;
+            student_name,
+            grade_value,
+            class_name
+            FROM grades`;
 
-        let inserts = [class_name];
-
-        let mysqlQuery = mysql.format( query , inserts );
-
-        database.query( mysqlQuery , ( err , data , fields ) => {
+        database.query( query , ( err , data , fields ) => {
             if(!err) {
                 console.log( 'query successful' );
                 output.success = true;
