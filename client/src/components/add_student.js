@@ -1,34 +1,48 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { addStudent , updateInput } from "../actions";
+import { addStudent, updateInput , clearInput} from "../actions";
 
 class AddStudent extends React.Component {
     constructor(props) {
         super(props);
+
+        this.student = {
+            student_name: '',
+            grade_value: '',
+            class_name: ''
+        };
     }
 
     async addStudentToServer() {
-        debugger;
-        const { student_name , grade_value , class_name } = this.props;
-        const student = {
+        const { student_name, grade_value, class_name } = this.props;
+        
+        this.student = {
             student_name,
             grade_value,
             class_name
         };
 
-        console.log(student);
-        await this.props.addStudent( student );
+        await this.props.addStudent(this.student);
+
+        this.clearInput();
+    }
+
+    clearInput() {
+        for( let key in this.student ){
+            this.props.clearInput(key);
+        }
+
     }
 
     updateInput(event) {
-        const { name , value } = event.target;
+        const { name, value } = event.target;
 
-        this.props.updateInput( name , value );
+        this.props.updateInput(name, value);
     }
 
     render() {
 
-        const { student_name , grade_value , class_name } = this.props;
+        const { student_name, grade_value, class_name } = this.props;
 
         return (
             <div className="col-lg-4 student-add-form form-group pull-right">
@@ -38,7 +52,7 @@ class AddStudent extends React.Component {
                         <span className="glyphicon glyphicon-user" />
                     </span>
                     <input
-                    onChange={this.updateInput.bind(this)}
+                        onChange={this.updateInput.bind(this)}
                         type="text"
                         className="col form-control col-sm input-sm"
                         name="student_name"
@@ -52,7 +66,7 @@ class AddStudent extends React.Component {
                         <span className="glyphicon glyphicon-th-list" />
                     </span>
                     <input
-                    onChange={this.updateInput.bind(this)}
+                        onChange={this.updateInput.bind(this)}
                         type="text"
                         className="col form-control col-sm input-sm"
                         name="class_name"
@@ -66,7 +80,7 @@ class AddStudent extends React.Component {
                         <span className="glyphicon glyphicon-education" />
                     </span>
                     <input
-                    onChange={this.updateInput.bind(this)}
+                        onChange={this.updateInput.bind(this)}
                         type="text"
                         className="col form-control col-sm input-sm"
                         name="grade_value"
@@ -76,7 +90,7 @@ class AddStudent extends React.Component {
                     />
                 </div>
                 <button onClick={() => { this.addStudentToServer() }} type="button" className="btn btn-default btn-success addButton"  > Add </button>
-                <button type="button" className="btn btn-default cancelButton"  >Cancel</button>
+                <button onClick={ () => { this.clearInput() }} type="button" className="btn btn-default cancelButton"  >Cancel</button>
                 <button type="button" className="btn btn-default btn-primary getServerDataButton" >Get Data From Server</button>
             </div>
         );
@@ -91,4 +105,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps , { addStudent , updateInput} )(AddStudent);
+export default connect(mapStateToProps, { addStudent, updateInput , clearInput })(AddStudent);

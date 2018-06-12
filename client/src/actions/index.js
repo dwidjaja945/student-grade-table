@@ -24,7 +24,6 @@ export function getStudentList() {
 };
 
 export function addStudent( student ) {
-    debugger;
     const response = axios.post( '/api/add_student' , student );
 
     return {
@@ -40,5 +39,12 @@ export function updateInput( name , value ) {
             name,
             value
         }
+    }
+}
+
+export function clearInput( name ) {
+    return {
+        type: types.CLEAR_INPUT,
+        payload: name
     }
 }
