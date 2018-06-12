@@ -20,9 +20,7 @@ export default ( state=DEFAULT_STATE , action ) => {
                     errors : [...state.errors , action.payload.data.errors]
                 };
             };
-
         default:
             return state;
     };
-
 };

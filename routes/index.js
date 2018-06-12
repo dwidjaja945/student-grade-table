@@ -1,5 +1,13 @@
-module.exports = ( webserver , mysql , database ) => {
+const fs = require("fs");
 
-    require('./get_student_data')( webserver , mysql , database );
-
-}
+module.exports = ( webserver, mysql, database )=>{
+    fs.readdir(__dirname, ( err , files ) => {
+        if(!err) {
+            files.forEach(file => {
+                require(`./${file}`)(webserver, mysql, database);
+            });
+        }else{
+            console.log( "There was an error adding all routes in the index.js file" , err );
+        }
+    })
+};

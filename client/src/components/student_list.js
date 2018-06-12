@@ -19,7 +19,7 @@ class StudentList extends React.Component {
         const studentData = this.props.studentList.map( (item , itemIndex) => {
             return (
                 <tr key={itemIndex}>
-                    <td>{item.full_name}</td>
+                    <td>{item.student_name}</td>
                     <td>{item.class_name}</td>
                     <td>{item.grade_value}</td>
                 </tr>
