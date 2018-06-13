@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getStudentList , deleteStudent } from '../actions';
+import { getStudentList , deleteStudent , calculateAverageGrade } from '../actions';
 
 class StudentList extends React.Component {
     constructor ( props ) {
@@ -12,12 +12,14 @@ class StudentList extends React.Component {
 
     async getStudentData() {
         await this.props.getStudentList();
+
+        await this.props.calculateAverageGrade(this.props.studentList);
     }
 
     async deleteStudent(id) {
         await this.props.deleteStudent(id);
         this.getStudentData();
-    }
+    };
     
     render() {
         console.log('this.props: ' ,this.props);
@@ -62,4 +64,4 @@ function mapStateToProps ( state ) {
 
 };
 
-export default connect( mapStateToProps , { getStudentList , deleteStudent } )(StudentList);
+export default connect( mapStateToProps , { getStudentList , deleteStudent , calculateAverageGrade } )(StudentList);

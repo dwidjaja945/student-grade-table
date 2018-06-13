@@ -9,8 +9,6 @@ export function incrementCount(count) {
     };
 };
 
-
-
 // export async function getStudentList() {
 export function getStudentList() {
 
@@ -58,5 +56,20 @@ export function clearInput( name ) {
     return {
         type: types.CLEAR_INPUT,
         payload: name
+    }
+}
+
+export function calculateAverageGrade(studentArray) {
+    let totalPoints = 0;
+    let numberOfStudents = 0;
+    studentArray.map( ( item , itemIndex ) => {
+        totalPoints += item.grade_value;
+        numberOfStudents++
+    });
+    const average = totalPoints / numberOfStudents;
+
+    return {
+        type: types.CALCULATE_AVERAGE_GRADE,
+        payload: average
     }
 }
