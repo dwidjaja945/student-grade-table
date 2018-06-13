@@ -66,7 +66,10 @@ export function calculateAverageGrade(studentArray) {
         totalPoints += item.grade_value;
         numberOfStudents++
     });
-    const average = totalPoints / numberOfStudents;
+    let average = (totalPoints / numberOfStudents).toFixed(2);
+    if(average === 100.00) {
+        average = 100;
+    }
 
     return {
         type: types.CALCULATE_AVERAGE_GRADE,
