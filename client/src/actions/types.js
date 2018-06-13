@@ -4,5 +4,6 @@ export default {
     UPDATE_INPUT: "update_input",
     CLEAR_INPUT: "clear_input",
     ADD_STUDENT: 'add_student',
-    DELETE_STUDENT: 'delete_student'
+    DELETE_STUDENT: 'delete_student',
+    CALCULATE_AVERAGE_GRADE: 'calculate_average_grade'
 };
