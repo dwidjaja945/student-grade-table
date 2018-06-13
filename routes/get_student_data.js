@@ -10,6 +10,7 @@ module.exports = ( webserver , mysql , database ) => {
 
         let query = `
             SELECT 
+            id,
             student_name,
             grade_value,
             class_name

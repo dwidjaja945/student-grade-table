@@ -1,16 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getStudentList } from '../actions';
+import { getStudentList , deleteStudent } from '../actions';
 
 class StudentList extends React.Component {
     constructor ( props ) {
         super(props);
 
         this.getStudentData();
+        this.deleteStudent = this.deleteStudent.bind(this);
     };
 
     async getStudentData() {
         await this.props.getStudentList();
+    }
+
+    async deleteStudent(id) {
+        id;
+        debugger;
+        await this.props.deleteStudent(id);
+        this.getStudentData();
     }
     
     render() {
@@ -22,6 +30,7 @@ class StudentList extends React.Component {
                     <td>{item.student_name}</td>
                     <td>{item.class_name}</td>
                     <td>{item.grade_value}</td>
+                    <td><button className="btn btn-default btn-danger" onClick={ () => {this.deleteStudent(item.id)}} >Delete</button></td>
                 </tr>
             )
         });
@@ -55,4 +64,4 @@ function mapStateToProps ( state ) {
 
 };
 
-export default connect( mapStateToProps , { getStudentList } )(StudentList);
+export default connect( mapStateToProps , { getStudentList , deleteStudent } )(StudentList);

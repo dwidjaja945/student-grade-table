@@ -32,6 +32,18 @@ export function addStudent( student ) {
     };
 };
 
+export function deleteStudent( id ) {
+    const idToSend = {
+        id
+    }
+    const response = axios.post( '/api/delete_student' , idToSend );
+
+    return {
+        type : types.DELETE_STUDENT,
+        payload: response
+    };
+};
+
 export function updateInput( name , value ) {
     return {
         type: types.UPDATE_INPUT,
