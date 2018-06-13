@@ -34,9 +34,9 @@ export function addStudent( student ) {
 
 export function deleteStudent( id ) {
     const idToSend = {
-        id
+        params: {id}
     }
-    const response = axios.post( '/api/delete_student' , idToSend );
+    const response = axios.delete( '/api/delete_student' , idToSend );
 
     return {
         type : types.DELETE_STUDENT,

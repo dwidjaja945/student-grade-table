@@ -1,6 +1,6 @@
 module.exports = ( webserver, mysql, database ) => {
 
-    webserver.post( '/api/delete_student' , ( req , res ) => {
+    webserver.delete( '/api/delete_student' , ( req , res ) => {
 
         const output = {
             success: false,
@@ -9,7 +9,7 @@ module.exports = ( webserver, mysql, database ) => {
             message: ""
         };
 
-        let { id } = req.body;
+        let { id } = req.query;
 
         let query = `
             DELETE FROM grades
@@ -23,7 +23,6 @@ module.exports = ( webserver, mysql, database ) => {
 
             if(!err) {
                 output.success = true;
-                output.data = data;
                 output.message = "Student successfully deleted";
             } else {
                 output.errors = err;
