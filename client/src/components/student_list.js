@@ -15,8 +15,6 @@ class StudentList extends React.Component {
     }
 
     async deleteStudent(id) {
-        id;
-        debugger;
         await this.props.deleteStudent(id);
         this.getStudentData();
     }
