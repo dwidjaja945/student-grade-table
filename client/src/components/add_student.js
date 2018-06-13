@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { addStudent, updateInput , clearInput , getStudentList } from "../actions";
+import { addStudent, updateInput , clearInput , getStudentList , calculateAverageGrade } from "../actions";
 
 class AddStudent extends React.Component {
     constructor(props) {
@@ -24,7 +24,8 @@ class AddStudent extends React.Component {
 
         await this.props.addStudent(this.student);
 
-        this.props.getStudentList();
+        await this.props.getStudentList();
+        await this.props.calculateAverageGrade(this.props.studentList);
         this.clearInput();
     }
 
@@ -102,8 +103,9 @@ function mapStateToProps(state) {
     return {
         student_name: state.inputReducer.student_name,
         class_name: state.inputReducer.class_name,
-        grade_value: state.inputReducer.grade_value
+        grade_value: state.inputReducer.grade_value,
+        studentList: state.studentListReducer.studentList
     }
 }
 
-export default connect(mapStateToProps, { addStudent, updateInput , clearInput , getStudentList})(AddStudent);
+export default connect(mapStateToProps, { addStudent, updateInput , clearInput , getStudentList ,calculateAverageGrade })(AddStudent);
