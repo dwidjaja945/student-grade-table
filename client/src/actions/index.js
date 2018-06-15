@@ -76,3 +76,13 @@ export function calculateAverageGrade(studentArray) {
         payload: average
     }
 }
+
+export function updateStudent( student ) {
+
+    const response = axios.post( '/api/update_student' , student );
+
+    return{
+        type: types.UPDATE_STUDENT,
+        payload: response
+    }
+}
