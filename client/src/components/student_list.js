@@ -38,7 +38,6 @@ class StudentList extends React.Component {
     }
 
     render() {
-        const { student_name , class_name , grade_value } = this.props;
 
         const studentData = this.props.studentList.map((item, itemIndex) => {
             return (
@@ -58,6 +57,14 @@ class StudentList extends React.Component {
             )
         });
 
+        let noDataMessage = '';
+        debugger;
+        if (this.props.studentList.length === 0) {
+            noDataMessage = 'No Data To Display';
+        } else {
+            noDataMessage = "";
+        }
+
         const updateModal = this.displayUpdateModal();
 
         return (
@@ -76,7 +83,7 @@ class StudentList extends React.Component {
                     </tbody>
                 </table>
                 <div className="updateModal">{updateModal}</div>
-                <div className="noData">No Data to Display</div>
+                <div className="noData"><h3>{noDataMessage}</h3></div>
             </div>
         );
     }
