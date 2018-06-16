@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UpdateModal from './update_modal';
-import { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate } from '../actions';
+import { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate , getSingleStudent } from '../actions';
 
 class StudentList extends React.Component {
     constructor ( props ) {
@@ -32,7 +32,8 @@ class StudentList extends React.Component {
         }
     }
 
-    toggleUpdate(e, student) {
+    async toggleUpdate(e, student) {
+        await this.props.getSingleStudent(student.id)
         this.props.toggleUpdate(this.props , student);
     }
 
@@ -89,4 +90,4 @@ function mapStateToProps ( state ) {
 
 };
 
-export default connect( mapStateToProps , { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate } )(StudentList);
+export default connect( mapStateToProps , { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate , getSingleStudent } )(StudentList);

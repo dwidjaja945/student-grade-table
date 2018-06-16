@@ -1,7 +1,7 @@
 import React from 'react';
 import AddStudent from './add_student';
 import { connect } from 'react-redux';
-import { getStudentList , toggleUpdate , updateInput , updateStudent } from "../actions";
+import { getStudentList , toggleUpdate , updateInput , updateStudent , clearInput , getSingleStudent } from "../actions";
 
 class UpdateModal extends React.Component {
     constructor(props) {
@@ -12,19 +12,26 @@ class UpdateModal extends React.Component {
         this.student = {
             student_name: '',
             grade_value: '',
-            class_name: ''
+            class_name: '',
+            id: ''
         };
+        this.removeModal = this.removeModal.bind(this);
     }
 
     async updateStudent() {
+        debugger;
         const student = {
             student_name : this.props.student_name,
             class_name: this.props.class_name, 
             grade_value: this.props.grade_value 
         };
+
+        const id = this.props.id
         
-        await this.props.updateStudent(student);
+        await this.props.updateStudent(student , id);
         await this.props.getStudentList();
+        await this.removeModal();
+        this.clearInput();
     }
 
     updateInput(event) {
@@ -38,10 +45,20 @@ class UpdateModal extends React.Component {
             this.props.clearInput(key);
         }
     }
+
+    removeModal() {
+        this.clearInput();
+        this.props.toggleUpdate(this.props.updateOn, this.student);
+    }
+
+    async getSingleStudentData() {
+        await this.props.getSingleStudentData();
+    }
     
     render() {
 
-        const { student_name , class_name , grade_value } = this.props.updateOn;
+        const { student_name , class_name , grade_value } = this.props;
+
 
         return (
             <div className='modalContainer'>
@@ -89,8 +106,8 @@ class UpdateModal extends React.Component {
                             placeholder="Student Grade"
                         />
                     </div>
-                    <button onClick={() => { this.addStudentToServer() }} type="button" className="btn btn-default btn-success addButton"  > Save </button>
-                    <button onClick={() => { this.clearInput() }} type="button" className="btn btn-default cancelButton"  >Cancel</button>
+                    <button onClick={() => { this.updateStudent(); }} type="button" className="btn btn-default btn-success addButton"  > Save </button>
+                    <button onClick={ () => { this.removeModal()} } type="button" className="btn btn-default cancelButton"  >Cancel</button>
                 </div>
             </div>
         );
@@ -98,13 +115,15 @@ class UpdateModal extends React.Component {
 }
 
 function mapStateToProps( state ) {
+    debugger;
     return {
-        student_name : state.inputReducer.studentName,
-        class_name: state.inputReducer.className,
+        student_name : state.inputReducer.student_name,
+        class_name: state.inputReducer.class_name,
         grade_value: state.inputReducer.grade_value,
-        updateOn : state.toggleUpdateReducer.updateOn
+        id : state.inputReducer.id,
+        updateOn : state.toggleUpdateReducer.updateOn,
     }
 }
 
 
-export default connect(mapStateToProps, { getStudentList, updateInput, updateStudent, toggleUpdate })(UpdateModal);
+export default connect(mapStateToProps, { getStudentList, updateInput, updateStudent, toggleUpdate, clearInput, getSingleStudent })(UpdateModal);
