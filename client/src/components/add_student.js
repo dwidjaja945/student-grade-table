@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { addStudent, updateInput , clearInput , getStudentList , calculateAverageGrade } from "../actions";
+import { addStudent, updateInput , clearInput , getStudentList , calculateAverageGrade , toggleUpdate } from "../actions";
 
 class AddStudent extends React.Component {
     constructor(props) {
@@ -43,8 +43,8 @@ class AddStudent extends React.Component {
     }
 
     render() {
-
         const { student_name, grade_value, class_name } = this.props;
+
 
         return (
             <div className="col-lg-4 student-add-form form-group pull-right">
@@ -93,7 +93,7 @@ class AddStudent extends React.Component {
                 </div>
                 <button onClick={() => { this.addStudentToServer() }} type="button" className="btn btn-default btn-success addButton"  > Add </button>
                 <button onClick={ () => { this.clearInput() }} type="button" className="btn btn-default cancelButton"  >Cancel</button>
-                <button type="button" className="btn btn-default btn-primary getServerDataButton" >Get Data From Server</button>
+                <button type="button" className="btn btn-default btn-primary getServerDataButton" >Update Students</button>
             </div>
         );
     }
@@ -104,8 +104,9 @@ function mapStateToProps(state) {
         student_name: state.inputReducer.student_name,
         class_name: state.inputReducer.class_name,
         grade_value: state.inputReducer.grade_value,
-        studentList: state.studentListReducer.studentList
+        studentList: state.studentListReducer.studentList,
+        updateOn: state.toggleUpdateReducer.updateOn
     }
 }
 
-export default connect(mapStateToProps, { addStudent, updateInput , clearInput , getStudentList ,calculateAverageGrade })(AddStudent);
+export default connect(mapStateToProps, { addStudent, updateInput, clearInput, getStudentList, calculateAverageGrade, toggleUpdate } )(AddStudent);

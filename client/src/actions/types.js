@@ -6,5 +6,6 @@ export default {
     ADD_STUDENT: 'add_student',
     DELETE_STUDENT: 'delete_student',
     CALCULATE_AVERAGE_GRADE: 'calculate_average_grade',
-    UPDATE_STUDENT: 'update_student'
+    UPDATE_STUDENT: 'update_student',
+    TOGGLE_UPDATE: 'toggle_update'
 };
