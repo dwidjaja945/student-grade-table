@@ -19,7 +19,6 @@ class UpdateModal extends React.Component {
     }
 
     async updateStudent() {
-        debugger;
         const student = {
             student_name : this.props.student_name,
             class_name: this.props.class_name, 
@@ -115,7 +114,6 @@ class UpdateModal extends React.Component {
 }
 
 function mapStateToProps( state ) {
-    debugger;
     return {
         student_name : state.inputReducer.student_name,
         class_name: state.inputReducer.class_name,
