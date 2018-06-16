@@ -10,5 +10,5 @@ export default combineReducers({
   studentListReducer: studentListReducer,
   inputReducer: inputReducer,
   averageGradeReducer: averageGradeReducer,
-  toggleUpdateReducer: toggleUpdateReducer
+  toggleUpdateReducer: toggleUpdateReducer,
 });

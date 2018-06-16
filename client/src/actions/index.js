@@ -77,9 +77,14 @@ export function calculateAverageGrade(studentArray) {
     }
 }
 
-export function updateStudent( student ) {
+export function updateStudent( student , id) {
 
-    const response = axios.post( '/api/update_student' , student );
+    const dataToSend = {
+        ...student,
+        id
+    }
+
+    const response = axios.post( '/api/update_student' , dataToSend );
 
     return{
         type: types.UPDATE_STUDENT,
@@ -87,13 +92,9 @@ export function updateStudent( student ) {
     }
 }
 
-export function toggleUpdate(state , student) {
+export function toggleUpdate(toggleOn , student) {
     let response = {
-        updateOn: state.updateOn, 
-        id: student.id,
-        student_name: student.student_name,
-        class_name: student.class_name,
-        grade_value : student.grade_value,
+        updateOn: toggleOn.updateOn, 
     }
 
     if( response.updateOn === true ) {
@@ -104,6 +105,20 @@ export function toggleUpdate(state , student) {
 
     return {
         type: types.TOGGLE_UPDATE,
+        payload: response
+    }
+}
+
+export function getSingleStudent(id) {
+    debugger;
+    const dataToSend = {
+        id
+    };
+
+    const response = axios.post('/api/single_student_data', dataToSend );
+
+    return {
+        type: types.GET_SINGLE_STUDENT,
         payload: response
     }
 }

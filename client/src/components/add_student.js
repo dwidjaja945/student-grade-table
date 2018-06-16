@@ -33,7 +33,6 @@ class AddStudent extends React.Component {
         for( let key in this.student ){
             this.props.clearInput(key);
         }
-
     }
 
     updateInput(event) {
@@ -56,7 +55,7 @@ class AddStudent extends React.Component {
                     <input
                         onChange={this.updateInput.bind(this)}
                         type="text"
-                        className="col form-control col-sm input-sm"
+                        className="textField col form-control col-sm input-sm"
                         name="student_name"
                         value={student_name}
                         id="studentName"
@@ -70,7 +69,7 @@ class AddStudent extends React.Component {
                     <input
                         onChange={this.updateInput.bind(this)}
                         type="text"
-                        className="col form-control col-sm input-sm"
+                        className="textField col form-control col-sm input-sm"
                         name="class_name"
                         value={class_name}
                         id="course"
@@ -84,7 +83,7 @@ class AddStudent extends React.Component {
                     <input
                         onChange={this.updateInput.bind(this)}
                         type="text"
-                        className="col form-control col-sm input-sm"
+                        className="textField col form-control col-sm input-sm"
                         name="grade_value"
                         value={grade_value}
                         id="studentGrade"

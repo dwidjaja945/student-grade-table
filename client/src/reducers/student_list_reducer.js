@@ -2,10 +2,11 @@ import types from '../actions/types';
 
 const DEFAULT_STATE = {
     studentList : [],
-    errors: []
+    errors: [],
 };
 
 export default ( state=DEFAULT_STATE , action ) => {
+    debugger;
     switch( action.type ) {
         case types.GET_STUDENT_LIST:
             if (action.payload.data.success) {

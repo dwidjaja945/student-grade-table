@@ -2,10 +2,6 @@ import types from '../actions/types';
 
 const DEFAULT_STATE = {
     updateOn: false,
-    id: '',
-    student_name: '',
-    grade_value: '',
-    class_name: ''
 }
 
 export default ( state=DEFAULT_STATE , action ) => {
