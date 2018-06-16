@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getStudentList , deleteStudent , calculateAverageGrade } from '../actions';
+import UpdateModal from './update_modal';
+import { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate } from '../actions';
 
 class StudentList extends React.Component {
     constructor ( props ) {
@@ -8,6 +9,7 @@ class StudentList extends React.Component {
 
         this.getStudentData();
         this.deleteStudent = this.deleteStudent.bind(this);
+        this.toggleUpdate = this.toggleUpdate.bind(this);
     };
 
     async getStudentData() {
@@ -21,19 +23,41 @@ class StudentList extends React.Component {
         this.getStudentData();
     };
     
-    render() {
-        console.log('this.props: ' ,this.props);
+    displayUpdateModal () {
+        const { updateOn } = this.props.updateOn;
+        if (updateOn) {
+            return (<UpdateModal/>)
+        } else {
+            return <span></span>
+        }
+    }
 
-        const studentData = this.props.studentList.map( (item , itemIndex) => {
+    toggleUpdate(e, student) {
+        this.props.toggleUpdate(this.props , student);
+    }
+
+    render() {
+        const { student_name , class_name , grade_value } = this.props;
+
+        const studentData = this.props.studentList.map((item, itemIndex) => {
             return (
                 <tr key={itemIndex}>
                     <td>{item.student_name}</td>
                     <td>{item.class_name}</td>
                     <td>{item.grade_value}</td>
-                    <td><button className="btn btn-default btn-danger" onClick={ () => {this.deleteStudent(item.id)}} >Delete</button></td>
+                    <td>
+                        <button className="btn btn-default btn-danger" onClick={() => { this.deleteStudent(item.id) }} >
+                        Delete
+                        </button>
+                        <button className="btn btn-default" onClick={(id) => this.toggleUpdate(null , item)} >
+                            Edit
+                        </button>
+                    </td>
                 </tr>
             )
         });
+
+        const updateModal = this.displayUpdateModal();
 
         return (
             <div className="pull-left col-lg-8 student-list-container">
@@ -50,6 +74,7 @@ class StudentList extends React.Component {
                         {studentData}
                     </tbody>
                 </table>
+                <div className="updateModal">{updateModal}</div>
                 <div className="noData">No Data to Display</div>
             </div>
         );
@@ -57,11 +82,11 @@ class StudentList extends React.Component {
 }
 
 function mapStateToProps ( state ) {
-
     return ({
-        studentList : state.studentListReducer.studentList
+        studentList : state.studentListReducer.studentList,
+        updateOn: state.toggleUpdateReducer.updateOn
     });
 
 };
 
-export default connect( mapStateToProps , { getStudentList , deleteStudent , calculateAverageGrade } )(StudentList);
+export default connect( mapStateToProps , { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate } )(StudentList);

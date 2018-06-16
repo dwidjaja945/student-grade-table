@@ -86,3 +86,24 @@ export function updateStudent( student ) {
         payload: response
     }
 }
+
+export function toggleUpdate(state , student) {
+    let response = {
+        updateOn: state.updateOn, 
+        id: student.id,
+        student_name: student.student_name,
+        class_name: student.class_name,
+        grade_value : student.grade_value,
+    }
+
+    if( response.updateOn === true ) {
+        response.updateOn = false;
+    } else {
+        response.updateOn = true;
+    };
+
+    return {
+        type: types.TOGGLE_UPDATE,
+        payload: response
+    }
+}
