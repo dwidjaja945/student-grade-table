@@ -19,6 +19,10 @@ module.exports = ( webserver , mysql , database ) => {
 
         let inserts = [class_name, student_name, grade_value];
 
+        for ( let i = 0 ; i < inserts.length ; i++ ) {
+            inserts[i] = slashes.add(inserts[i]);
+        }
+
         let mysqlQuery = mysql.format( query , inserts );
 
         database.query( mysqlQuery , ( err , data , fields ) => {

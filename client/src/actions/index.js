@@ -63,7 +63,7 @@ export function calculateAverageGrade(studentArray) {
     let totalPoints = 0;
     let numberOfStudents = 0;
     studentArray.map( ( item , itemIndex ) => {
-        totalPoints += item.grade_value;
+        totalPoints += parseFloat(item.grade_value);
         numberOfStudents++
     });
     let average = (totalPoints / numberOfStudents).toFixed(2);

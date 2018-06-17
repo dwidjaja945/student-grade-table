@@ -1,3 +1,4 @@
+const slashes = require('slashes');
 module.exports = ( webserver , mysql , database ) => {
 
     webserver.get( '/api/get_student_data' , ( req , res ) => {
@@ -18,6 +19,11 @@ module.exports = ( webserver , mysql , database ) => {
 
         database.query( query , ( err , data , fields ) => {
             if(!err) {
+                for ( let i = 0 ; i < data.length ; i++ ) {
+                    for ( let key in data[i] ) {
+                        data[i][key] = slashes.strip(data[i][key]);
+                    }
+                };
                 console.log( 'query successful' );
                 output.success = true;
                 output.data = data;
