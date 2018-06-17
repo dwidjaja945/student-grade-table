@@ -36,6 +36,14 @@
     margin: 3%;
 }
 
+td {
+  vertical-align: middle !important
+}
+
+tr > th {
+    text-align: center;
+}
+
 .modalContainer{
     /* display: none; */
     position: fixed;
