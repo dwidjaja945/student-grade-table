@@ -66,7 +66,7 @@ class AddStudent extends React.Component {
         const invalidNameMessage = this.checkValidName(student_name);
 
         return (
-            <div className="col-lg-4 student-add-form form-group pull-right">
+            <div className="col-lg-4 student-add-form form-group">
                 <h4>Add Student</h4>
                 <div className="form-group input-group">
                     <span className="input-group-addon">
@@ -114,7 +114,6 @@ class AddStudent extends React.Component {
                 {invalidGradeMessage}
                 <button onClick={() => { this.addStudentToServer() }} type="button" className="btn btn-default btn-success addButton"  > Add </button>
                 <button onClick={ () => { this.clearInput() }} type="button" className="btn btn-default cancelButton"  >Cancel</button>
-                <button type="button" className="btn btn-default btn-primary getServerDataButton" >Update Students</button>
             </div>
         );
     }
