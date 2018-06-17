@@ -41,9 +41,29 @@ class AddStudent extends React.Component {
         this.props.updateInput(name, value);
     }
 
+    checkIfGradeIsNumber(grade) {
+        if(isNaN(grade) || grade > 100) {
+            return (
+                <div className='invalidMessage'>Please enter a valid grade</div>
+            )
+        };
+    }
+
+    checkValidName(studentName) {
+        let regex = studentName.match(/^[a-zA-Z]+$/);
+
+        if (regex === null && studentName !== "") {
+            return (
+                <div className="invalidMessage" >Please enter a valid name</div>
+            )
+        };
+    }
+
     render() {
         const { student_name, grade_value, class_name } = this.props;
 
+        const invalidGradeMessage = this.checkIfGradeIsNumber(grade_value);
+        const invalidNameMessage = this.checkValidName(student_name);
 
         return (
             <div className="col-lg-4 student-add-form form-group pull-right">
@@ -62,6 +82,7 @@ class AddStudent extends React.Component {
                         placeholder="Student Name"
                     />
                 </div>
+                {invalidNameMessage}
                 <div className="form-group input-group">
                     <span className="input-group-addon">
                         <span className="glyphicon glyphicon-th-list" />
@@ -90,6 +111,7 @@ class AddStudent extends React.Component {
                         placeholder="Student Grade"
                     />
                 </div>
+                {invalidGradeMessage}
                 <button onClick={() => { this.addStudentToServer() }} type="button" className="btn btn-default btn-success addButton"  > Add </button>
                 <button onClick={ () => { this.clearInput() }} type="button" className="btn btn-default cancelButton"  >Cancel</button>
                 <button type="button" className="btn btn-default btn-primary getServerDataButton" >Update Students</button>
