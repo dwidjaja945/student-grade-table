@@ -58,7 +58,7 @@ class StudentList extends React.Component {
         });
 
         let noDataMessage = '';
-        debugger;
+
         if (this.props.studentList.length === 0) {
             noDataMessage = 'No Data To Display';
         } else {

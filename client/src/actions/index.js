@@ -110,7 +110,6 @@ export function toggleUpdate(toggleOn , student) {
 }
 
 export function getSingleStudent(id) {
-    debugger;
     const dataToSend = {
         id
     };
