@@ -14,8 +14,12 @@ class AddStudent extends React.Component {
     }
 
     async addStudentToServer() {
-        const { student_name, grade_value, class_name } = this.props;
+        const { student_name, grade_value, class_name, inputsAreValid } = this.props;
         
+        if(!student_name || !grade_value || !class_name) {
+            return;
+        }
+
         this.student = {
             student_name,
             grade_value,
@@ -41,12 +45,18 @@ class AddStudent extends React.Component {
         this.props.updateInput(name, value);
     }
 
+    checkValidInputs(grade , name) {
+        if( !grade && !name ) {
+            this.props.toggleValidInputs();
+        };
+    }
+
     checkIfGradeIsNumber(grade) {
         if(isNaN(grade) || grade > 100) {
             return (
                 <div className='invalidMessage'>Please enter a valid grade</div>
             )
-        };
+        }
     }
 
     checkValidName(studentName) {
@@ -125,7 +135,7 @@ function mapStateToProps(state) {
         class_name: state.inputReducer.class_name,
         grade_value: state.inputReducer.grade_value,
         studentList: state.studentListReducer.studentList,
-        updateOn: state.toggleUpdateReducer.updateOn
+        updateOn: state.toggleUpdateReducer.updateOn,
     }
 }
 
