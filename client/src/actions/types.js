@@ -8,5 +8,5 @@ export default {
     CALCULATE_AVERAGE_GRADE: 'calculate_average_grade',
     UPDATE_STUDENT: 'update_student',
     TOGGLE_UPDATE: 'toggle_update',
-    GET_SINGLE_STUDENT: 'get_single_student'
+    GET_SINGLE_STUDENT: 'get_single_student',
 };

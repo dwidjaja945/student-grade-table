@@ -92,7 +92,7 @@ export function updateStudent( student , id) {
     }
 }
 
-export function toggleUpdate(toggleOn , student) {
+export function toggleUpdate(toggleOn) {
     let response = {
         updateOn: toggleOn.updateOn, 
     }
