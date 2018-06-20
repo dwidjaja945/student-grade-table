@@ -1,7 +1,7 @@
 <?php
 
 // Pulling in the credentials from .gitignored file
-require_once('mysqlCredentials.php');
+require_once('../config/mysqlCredentials.php');
 
 // Creating output object
 $output = [
@@ -11,7 +11,7 @@ $output = [
 ];
 
 // Creating sql query for database
-$query = "SELECT * FROM users";
+$query = "SELECT `id`, `student_name`, `grade_value`, `class_name` FROM grades";
 
 // The result of the mysql query
 $result = mysqli_query($connection , $query);
