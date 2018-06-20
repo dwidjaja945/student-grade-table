@@ -23,6 +23,7 @@ export function getStudentList() {
 
 export function addStudent( student ) {
     const response = axios.post( '/api/add_student' , student );
+    // const response = axios.post('../../../php_server/add_student.php', student);
 
     return {
         type: types.ADD_STUDENT,
