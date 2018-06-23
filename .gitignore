@@ -3,3 +3,4 @@ config/mysqlCredentials.js
 mysqlCredentials.js
 mysqlCredentials.php
 php_prototype/mysqlCredentials.php
+.vscode
