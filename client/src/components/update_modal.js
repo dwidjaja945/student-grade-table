@@ -28,7 +28,7 @@ class UpdateModal extends React.Component {
         
         await this.props.updateStudent(student , id);
         await this.props.getStudentList();
-        await this.removeModal();
+        this.removeModal();
         this.clearInput();
     }
 
