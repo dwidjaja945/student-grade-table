@@ -13,7 +13,7 @@ class AddStudent extends React.Component {
         };
     }
 
-    async addStudentToServer() {
+    async addStudentToServer() {    
         const { student_name, grade_value, class_name } = this.props;
         
         if(!student_name || !grade_value || !class_name) {
@@ -25,12 +25,12 @@ class AddStudent extends React.Component {
             grade_value,
             class_name
         };
-
+        
         await this.props.addStudent(this.student);
-
+        this.clearInput();
+        
         await this.props.getStudentList();
         await this.props.calculateAverageGrade(this.props.studentList);
-        this.clearInput();
     }
 
     clearInput() {

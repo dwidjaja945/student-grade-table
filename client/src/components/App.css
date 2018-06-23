@@ -33,7 +33,11 @@
 
 .studentButtons {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+.student-list-container{
+  z-index: 5
 }
 
 .invalidMessage {
