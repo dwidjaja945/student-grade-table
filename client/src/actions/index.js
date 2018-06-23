@@ -53,6 +53,16 @@ export function updateInput( name , value ) {
     }
 }
 
+export function editInput(name, value) {
+    return {
+        type: types.EDIT_INPUT,
+        payload: {
+            name,
+            value
+        }
+    }
+}
+
 export function clearInput( name ) {
     return {
         type: types.CLEAR_INPUT,
