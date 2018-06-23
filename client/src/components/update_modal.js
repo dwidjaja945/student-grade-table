@@ -1,7 +1,7 @@
 import React from 'react';
 import AddStudent from './add_student';
 import { connect } from 'react-redux';
-import { getStudentList , toggleUpdate , updateInput , updateStudent , clearInput , getSingleStudent } from "../actions";
+import { getStudentList , toggleUpdate , editInput , updateStudent , clearInput , getSingleStudent } from "../actions";
 
 class UpdateModal extends React.Component {
     constructor(props) {
@@ -20,9 +20,9 @@ class UpdateModal extends React.Component {
 
     async updateStudent() {
         const student = {
-            student_name : this.props.student_name,
-            class_name: this.props.class_name, 
-            grade_value: this.props.grade_value 
+            student_name : this.props.edit_student_name,
+            class_name: this.props.edit_class_name, 
+            grade_value: this.props.edit_grade_value 
         };
 
         const id = this.props.id
@@ -36,7 +36,7 @@ class UpdateModal extends React.Component {
     updateInput(event) {
         const { name, value } = event.target;
 
-        this.props.updateInput(name, value);
+        this.props.editInput(name, value);
     }
 
     clearInput() {
@@ -47,7 +47,7 @@ class UpdateModal extends React.Component {
 
     removeModal() {
         this.clearInput();
-        this.props.toggleUpdate(this.props.updateOn, this.student);
+        this.props.toggleUpdate(this.props.updateOn);
     }
 
     async getSingleStudentData() {
@@ -56,7 +56,7 @@ class UpdateModal extends React.Component {
     
     render() {
 
-        const { student_name , class_name , grade_value } = this.props;
+        const { edit_student_name , edit_class_name , edit_grade_value } = this.props;
 
 
         return (
@@ -71,8 +71,8 @@ class UpdateModal extends React.Component {
                             onChange={this.updateInput}
                             type="text"
                             className="col form-control col-sm input-sm"
-                            name="student_name"
-                            value={student_name}
+                            name="edit_student_name"
+                            value={edit_student_name}
                             id="studentName"
                             placeholder="Student Name"
                         />
@@ -85,8 +85,8 @@ class UpdateModal extends React.Component {
                             onChange={this.updateInput}
                             type="text"
                             className="col form-control col-sm input-sm"
-                            name="class_name"
-                            value={class_name}
+                            name="edit_class_name"
+                            value={edit_class_name}
                             id="course"
                             placeholder="Student Course"
                         />
@@ -99,8 +99,8 @@ class UpdateModal extends React.Component {
                             onChange={this.updateInput}
                             type="text"
                             className="col form-control col-sm input-sm"
-                            name="grade_value"
-                            value={grade_value}
+                            name="edit_grade_value"
+                            value={edit_grade_value}
                             id="studentGrade"
                             placeholder="Student Grade"
                         />
@@ -118,10 +118,13 @@ function mapStateToProps( state ) {
         student_name : state.inputReducer.student_name,
         class_name: state.inputReducer.class_name,
         grade_value: state.inputReducer.grade_value,
+        edit_student_name: state.inputReducer.edit_student_name,
+        edit_class_name: state.inputReducer.edit_class_name,
+        edit_grade_value: state.inputReducer.edit_grade_value,
         id : state.inputReducer.id,
         updateOn : state.toggleUpdateReducer.updateOn,
     }
 }
 
 
-export default connect(mapStateToProps, { getStudentList, updateInput, updateStudent, toggleUpdate, clearInput, getSingleStudent })(UpdateModal);
+export default connect(mapStateToProps, { getStudentList, editInput, updateStudent, toggleUpdate, clearInput, getSingleStudent })(UpdateModal);
