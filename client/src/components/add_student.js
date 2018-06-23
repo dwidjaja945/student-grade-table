@@ -14,7 +14,7 @@ class AddStudent extends React.Component {
     }
 
     async addStudentToServer() {
-        const { student_name, grade_value, class_name, inputsAreValid } = this.props;
+        const { student_name, grade_value, class_name } = this.props;
         
         if(!student_name || !grade_value || !class_name) {
             return;
@@ -45,12 +45,6 @@ class AddStudent extends React.Component {
         this.props.updateInput(name, value);
     }
 
-    checkValidInputs(grade , name) {
-        if( !grade && !name ) {
-            this.props.toggleValidInputs();
-        };
-    }
-
     checkIfGradeIsNumber(grade) {
         if(isNaN(grade) || grade > 100) {
             return (
@@ -60,7 +54,7 @@ class AddStudent extends React.Component {
     }
 
     checkValidName(studentName) {
-        let regex = studentName.match(/^[a-zA-Z]+$/);
+        let regex = studentName.match(/^[a-zA-Z]+[ ]{0,1}[a-zA-Z]*$/);
 
         if (regex === null && studentName !== "") {
             return (

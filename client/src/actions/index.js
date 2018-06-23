@@ -1,6 +1,5 @@
 import types from './types';
 import axios from 'axios';
-import dummyData from '../dummydata';
 
 // export async function getStudentList() {
 export function getStudentList() {

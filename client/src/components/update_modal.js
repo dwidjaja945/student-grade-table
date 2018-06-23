@@ -1,5 +1,4 @@
 import React from 'react';
-import AddStudent from './add_student';
 import { connect } from 'react-redux';
 import { getStudentList , toggleUpdate , editInput , updateStudent , clearInput , getSingleStudent } from "../actions";
 
