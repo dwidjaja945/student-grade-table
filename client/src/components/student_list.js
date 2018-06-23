@@ -46,12 +46,14 @@ class StudentList extends React.Component {
                     <td>{item.class_name}</td>
                     <td>{item.grade_value}</td>
                     <td>
-                        <button className="btn btn-default btn-danger" onClick={() => { this.deleteStudent(item.id) }} >
-                        Delete
-                        </button>
-                        <button className="btn btn-default" onClick={(id) => this.toggleUpdate(null , item)} >
-                            Edit
-                        </button>
+                        <div className="studentButtons">
+                            <button className="btn btn-default" onClick={(id) => this.toggleUpdate(null , item)} >
+                                Edit
+                            </button>
+                            <button className="btn btn-default btn-danger" onClick={() => { this.deleteStudent(item.id) }} >
+                            Delete
+                            </button>
+                        </div>
                     </td>
                 </tr>
             )
@@ -68,7 +70,7 @@ class StudentList extends React.Component {
         const updateModal = this.displayUpdateModal();
 
         return (
-            <div className="pull-left col-lg-8 student-list-container">
+            <div className="pull-left col-lg-8 student-list-container col-xs-12">
                 <table className="table media-heading student-list">
                     <thead>
                         <tr>
