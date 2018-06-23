@@ -48,10 +48,6 @@ class UpdateModal extends React.Component {
         this.clearInput();
         this.props.toggleUpdate(this.props.updateOn);
     }
-
-    async getSingleStudentData() {
-        await this.props.getSingleStudentData();
-    }
     
     render() {
 
