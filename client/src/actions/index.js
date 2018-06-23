@@ -2,13 +2,6 @@ import types from './types';
 import axios from 'axios';
 import dummyData from '../dummydata';
 
-export function incrementCount(count) {
-    return {
-        type: types.INCREMENT_COUNT,
-        payload: ++count
-    };
-};
-
 // export async function getStudentList() {
 export function getStudentList() {
 
