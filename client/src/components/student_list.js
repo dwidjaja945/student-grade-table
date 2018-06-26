@@ -20,7 +20,6 @@ class StudentList extends React.Component {
 
     async deleteStudent(id) {
         await this.props.deleteStudent(id);
-        this.getStudentData();
     };
     
     displayUpdateModal () {
@@ -35,6 +34,10 @@ class StudentList extends React.Component {
     async toggleUpdate(e, student) {
         await this.props.getSingleStudent(student.id)
         this.props.toggleUpdate(this.props , student);
+    }
+
+    componentDidUpdate(){
+        this.getStudentData();
     }
 
     render() {
