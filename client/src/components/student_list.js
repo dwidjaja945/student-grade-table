@@ -14,12 +14,13 @@ class StudentList extends React.Component {
 
     async getStudentData() {
         await this.props.getStudentList();
+        this.props.calculateAverageGrade(this.props.studentList);
 
-        await this.props.calculateAverageGrade(this.props.studentList);
     }
 
     async deleteStudent(id) {
         await this.props.deleteStudent(id);
+        this.getStudentData();
     };
     
     displayUpdateModal () {
@@ -37,7 +38,7 @@ class StudentList extends React.Component {
     }
 
     componentDidUpdate(){
-        this.getStudentData();
+        // this.getStudentData();
     }
 
     render() {

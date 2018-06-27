@@ -64,12 +64,10 @@ export function clearInput( name ) {
 
 export function calculateAverageGrade(studentArray) {
     let totalPoints = 0;
-    let numberOfStudents = 0;
     studentArray.map( ( item , itemIndex ) => {
         totalPoints += parseFloat(item.grade_value);
-        numberOfStudents++
     });
-    let average = (totalPoints / numberOfStudents).toFixed(2);
+    let average = (totalPoints / studentArray.length).toFixed(2);
     if(average === 100.00) {
         average = 100;
     }
