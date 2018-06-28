@@ -13,7 +13,7 @@ class StudentList extends React.Component {
     };
 
     async getStudentData() {
-        await this.props.getStudentList();
+        await this.props.getStudentList(this.props.node_server);
         this.props.calculateAverageGrade(this.props.studentList);
 
     }
@@ -98,7 +98,8 @@ class StudentList extends React.Component {
 function mapStateToProps ( state ) {
     return ({
         studentList : state.studentListReducer.studentList,
-        updateOn: state.toggleUpdateReducer.updateOn
+        updateOn: state.toggleUpdateReducer.updateOn,
+        node_server: state.toggleServerReducer.node_server
     });
 
 };

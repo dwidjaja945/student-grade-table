@@ -10,4 +10,5 @@ export default {
     UPDATE_STUDENT: 'update_student',
     TOGGLE_UPDATE: 'toggle_update',
     GET_SINGLE_STUDENT: 'get_single_student',
+    TOGGLE_SERVER: 'toggle_server'
 };
