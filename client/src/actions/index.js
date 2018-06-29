@@ -88,14 +88,19 @@ export function calculateAverageGrade(studentArray) {
     }
 }
 
-export function updateStudent(student, id) {
+export function updateStudent(student, id , server) {
 
+    let response;
     const dataToSend = {
         ...student,
         id
     }
 
-    const response = axios.post('/api/update_student', dataToSend);
+    if( server ) {
+        response = axios.post('/api/update_student', dataToSend);
+    } else {
+        response = axios.post("/php_server/update_student.php" , qs.stringify(dataToSend));
+    };
 
     return {
         type: types.UPDATE_STUDENT,
