@@ -32,11 +32,17 @@ export function addStudent(student , server) {
     };
 };
 
-export function deleteStudent(id) {
+export function deleteStudent(id , server) {
+    let response;
     const idToSend = {
         params: { id }
     }
-    const response = axios.delete('/api/delete_student', idToSend);
+
+    if( server ) {
+        response = axios.delete("/api/delete_student", idToSend);
+    } else {
+        response = axios.delete("/php_server/delete_student.php" , idToSend);
+    };
 
     return {
         type: types.DELETE_STUDENT,
