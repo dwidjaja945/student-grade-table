@@ -18,7 +18,6 @@ export function getStudentList(server) {
 };
 
 export function addStudent(student , server) {
-    debugger;
     let response;
 
     if(server) {
@@ -125,12 +124,18 @@ export function toggleUpdate(toggleOn) {
     }
 }
 
-export function getSingleStudent(id) {
+export function getSingleStudent(id , server) {
+    let response;
     const dataToSend = {
         id
     };
-
-    const response = axios.post('/api/single_student_data', dataToSend);
+debugger;
+    if( server ) {
+        response = axios.post('/api/single_student_data', dataToSend);
+    } else {
+        debugger;
+        response = axios.post("/php_server/single_student.php" , qs.stringify(dataToSend));
+    }
 
     return {
         type: types.GET_SINGLE_STUDENT,

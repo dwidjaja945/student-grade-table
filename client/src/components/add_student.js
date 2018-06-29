@@ -28,7 +28,6 @@ class AddStudent extends React.Component {
 
         await this.props.addStudent(this.student , this.props.node_server);
         this.clearInput();
-        debugger;
         await this.props.getStudentList(this.props.node_server);
         await this.props.calculateAverageGrade(this.props.studentList);
     }
