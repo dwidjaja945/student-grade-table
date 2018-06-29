@@ -5,6 +5,9 @@
   "proxy": {
     "/api/*": {
       "target": "http://localhost:9000"
+    },
+    "/php_server/*": {
+      "target": "http://localhost:8888"
     }
   },
   "dependencies": {

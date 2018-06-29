@@ -1,7 +1,7 @@
 import types from '../actions/types';
 
 const DEFAULT_STATE = {
-    node_server: true
+    node_server: false
 }
 
 export default ( state=DEFAULT_STATE , action ) => {

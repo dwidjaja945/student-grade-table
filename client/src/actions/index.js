@@ -1,13 +1,14 @@
 import types from './types';
 import axios from 'axios';
 
-// export async function getStudentList() {
 export function getStudentList(server) {
+    debugger;
 
-    // axios call can go here
-    const response;
+    let response;
     if (server) {
         response = axios.get('/api/get_student_data');
+    } else {
+        response = axios.get("/php_server/get_student_data.php");
     }
 
     return {

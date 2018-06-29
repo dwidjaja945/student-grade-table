@@ -27,7 +27,7 @@ class UpdateModal extends React.Component {
         const id = this.props.id
         
         await this.props.updateStudent(student , id);
-        this.props.getStudentList();
+        this.props.getStudentList(this.props.node_server);
         this.removeModal();
         this.clearInput();
     }
@@ -118,6 +118,7 @@ function mapStateToProps( state ) {
         edit_grade_value: state.inputReducer.edit_grade_value,
         id : state.inputReducer.id,
         updateOn : state.toggleUpdateReducer.updateOn,
+        node_server: state.toggleServerReducer.node_server
     }
 }
 

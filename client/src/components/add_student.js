@@ -29,7 +29,7 @@ class AddStudent extends React.Component {
         await this.props.addStudent(this.student);
         this.clearInput();
         
-        await this.props.getStudentList();
+        await this.props.getStudentList(this.props.node_server);
         await this.props.calculateAverageGrade(this.props.studentList);
     }
 
@@ -69,11 +69,12 @@ class AddStudent extends React.Component {
         const invalidGradeMessage = this.checkIfGradeIsNumber(grade_value);
         const invalidNameMessage = this.checkValidName(student_name);
 
+        debugger;
         let serverType = "";
         if(this.props.node_server) {
-            serverType = "Node";
-        } else {
             serverType = "PHP";
+        } else {
+            serverType = "Node";
         };
 
         return <div className="col-lg-4 student-add-form form-group">
