@@ -5,9 +5,9 @@ class Header extends React.Component {
     render() {
         return (
             <div className="form-group">
-                <div className="visible-sm visible-md visible-lg visible-md page-header gradeTableHeader">
+                <div className="visible-sm visible-md visible-lg page-header gradeTableHeader">
                     <h1 className="" >Student Grade Table
-                <small className="col-lg-offset-6 col-md-offset-5 col-sm-offset-3">Grade Average : <span className="avgGrade label label-default">{this.props.averageGrade}%</span></small>
+                <small className="col-lg-offset-6 col-md-offset-4 col-sm-offset-2">Grade Average : <span className="avgGrade label label-default">{this.props.averageGrade}%</span></small>
                     </h1>
                 </div>
                 <div className="visible-xs page-header gradeTableHeader">
