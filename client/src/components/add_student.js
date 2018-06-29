@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { addStudent, updateInput , clearInput , getStudentList , calculateAverageGrade , toggleUpdate , toggleServer } from "../actions";
+import { addStudent, updateInput, clearInput, getStudentList, calculateAverageGrade, toggleUpdate, toggleServer } from "../actions";
 
 class AddStudent extends React.Component {
     constructor(props) {
@@ -13,10 +13,10 @@ class AddStudent extends React.Component {
         };
     }
 
-    async addStudentToServer() {    
+    async addStudentToServer() {
         const { student_name, grade_value, class_name } = this.props;
-        
-        if(!student_name || !grade_value || !class_name) {
+
+        if (!student_name || !grade_value || !class_name) {
             return;
         }
 
@@ -26,14 +26,14 @@ class AddStudent extends React.Component {
             class_name
         };
 
-        await this.props.addStudent(this.student , this.props.node_server);
+        await this.props.addStudent(this.student, this.props.node_server);
         this.clearInput();
         await this.props.getStudentList(this.props.node_server);
         await this.props.calculateAverageGrade(this.props.studentList);
     }
 
     clearInput() {
-        for( let key in this.student ){
+        for (let key in this.student) {
             this.props.clearInput(key);
         }
     }
@@ -45,7 +45,7 @@ class AddStudent extends React.Component {
     }
 
     checkIfGradeIsNumber(grade) {
-        if(isNaN(grade) || grade > 100) {
+        if (isNaN(grade) || grade > 100) {
             return (
                 <div className='invalidMessage'>Please enter a valid grade</div>
             )
@@ -69,7 +69,7 @@ class AddStudent extends React.Component {
         const invalidNameMessage = this.checkValidName(student_name);
 
         let serverType = "";
-        if(this.props.node_server) {
+        if (this.props.node_server) {
             serverType = "PHP";
         } else {
             serverType = "Node";
@@ -78,42 +78,42 @@ class AddStudent extends React.Component {
         return <div className="col-lg-4 student-add-form form-group">
             <h4>Add Student</h4>
             <div className="form-group input-group">
-              <span className="input-group-addon">
-                <span className="glyphicon glyphicon-user" />
-              </span>
-              <input onChange={this.updateInput.bind(this)} type="text" className="textField col form-control col-sm input-sm" name="student_name" value={student_name} id="studentName" placeholder="Student Name" />
+                <span className="input-group-addon">
+                    <span className="glyphicon glyphicon-user" />
+                </span>
+                <input onChange={this.updateInput.bind(this)} type="text" className="textField col form-control col-sm input-sm" name="student_name" value={student_name} id="studentName" placeholder="Student Name" />
             </div>
             {invalidNameMessage}
             <div className="form-group input-group">
-              <span className="input-group-addon">
-                <span className="glyphicon glyphicon-th-list" />
-              </span>
-              <input onChange={this.updateInput.bind(this)} type="text" className="textField col form-control col-sm input-sm" name="class_name" value={class_name} id="course" placeholder="Student Course" />
+                <span className="input-group-addon">
+                    <span className="glyphicon glyphicon-th-list" />
+                </span>
+                <input onChange={this.updateInput.bind(this)} type="text" className="textField col form-control col-sm input-sm" name="class_name" value={class_name} id="course" placeholder="Student Course" />
             </div>
             <div className="form-group input-group">
-              <span className="input-group-addon">
-                <span className="glyphicon glyphicon-education" />
-              </span>
-              <input onChange={this.updateInput.bind(this)} type="text" className="textField col form-control col-sm input-sm" name="grade_value" value={grade_value} id="studentGrade" placeholder="Student Grade" />
+                <span className="input-group-addon">
+                    <span className="glyphicon glyphicon-education" />
+                </span>
+                <input onChange={this.updateInput.bind(this)} type="text" className="textField col form-control col-sm input-sm" name="grade_value" value={grade_value} id="studentGrade" placeholder="Student Grade" />
             </div>
             {invalidGradeMessage}
             <div className="buttonContainer">
-              <button onClick={() => {
-                  this.addStudentToServer();
+                <button onClick={() => {
+                    this.addStudentToServer();
                 }} type="button" className="btn btn-default btn-success addButton">
-                {" "}
-                Add{" "}
-              </button>
-              <button onClick={() => {
-                  this.clearInput();
+                    {" "}
+                    Add{" "}
+                </button>
+                <button onClick={() => {
+                    this.clearInput();
                 }} type="button" className="btn btn-default cancelButton">
-                Cancel
+                    Cancel
               </button>
             </div>
             <button onClick={() => { this.props.toggleServer(this.props) }} type="button" className="btn btn-default btn-primary toggleServer">
-              Click for {serverType} Server
+                Click for {serverType} Server
             </button>
-          </div>;
+        </div>;
     }
 }
 
@@ -128,4 +128,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { addStudent, updateInput, clearInput, getStudentList, calculateAverageGrade, toggleUpdate, toggleServer } )(AddStudent);
+export default connect(mapStateToProps, { addStudent, updateInput, clearInput, getStudentList, calculateAverageGrade, toggleUpdate, toggleServer })(AddStudent);

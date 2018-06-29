@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getStudentList , toggleUpdate , editInput , updateStudent , clearInput , getSingleStudent } from "../actions";
+import { getStudentList, toggleUpdate, editInput, updateStudent, clearInput, getSingleStudent, calculateAverageGrade } from "../actions";
+import { checkIfGradeIsNumber , checkValidName } from '../helpers/index';
 
 class UpdateModal extends React.Component {
     constructor(props) {
@@ -24,10 +25,17 @@ class UpdateModal extends React.Component {
             grade_value: this.props.edit_grade_value 
         };
 
+        const { student_name , grade_value , class_name } = student;
+        
+        if (!student_name || !grade_value || !class_name) {
+          return;
+        }
+
         const id = this.props.id
         
         await this.props.updateStudent(student , id, this.props.node_server);
-        this.props.getStudentList(this.props.node_server);
+        await this.props.getStudentList(this.props.node_server);
+        this.props.calculateAverageGrade(this.props.studentList);
         this.removeModal();
         this.clearInput();
     }
@@ -53,6 +61,8 @@ class UpdateModal extends React.Component {
 
         const { edit_student_name , edit_class_name , edit_grade_value } = this.props;
 
+        const invalidGradeMessage = checkIfGradeIsNumber(edit_grade_value);
+        const invalidNameMessage = checkValidName(edit_student_name);
 
         return (
             <div className='modalContainer'>
@@ -72,6 +82,7 @@ class UpdateModal extends React.Component {
                             placeholder="Student Name"
                         />
                     </div>
+                    {invalidNameMessage}
                     <div className="form-group input-group">
                         <span className="input-group-addon">
                             <span className="glyphicon glyphicon-th-list" />
@@ -100,6 +111,7 @@ class UpdateModal extends React.Component {
                             placeholder="Student Grade"
                         />
                     </div>
+                    {invalidGradeMessage}
                     <button onClick={() => { this.updateStudent(); }} type="button" className="btn btn-default btn-success addButton"  > Save </button>
                     <button onClick={ () => { this.removeModal()} } type="button" className="btn btn-default cancelButton"  >Cancel</button>
                 </div>
@@ -118,9 +130,10 @@ function mapStateToProps( state ) {
         edit_grade_value: state.inputReducer.edit_grade_value,
         id : state.inputReducer.id,
         updateOn : state.toggleUpdateReducer.updateOn,
-        node_server: state.toggleServerReducer.node_server
+        node_server: state.toggleServerReducer.node_server,
+        studentList: state.studentListReducer.studentList
     }
 }
 
 
-export default connect(mapStateToProps, { getStudentList, editInput, updateStudent, toggleUpdate, clearInput, getSingleStudent })(UpdateModal);
+export default connect(mapStateToProps, { getStudentList, editInput, updateStudent, toggleUpdate, clearInput, getSingleStudent, calculateAverageGrade})(UpdateModal);
