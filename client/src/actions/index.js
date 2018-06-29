@@ -135,11 +135,10 @@ export function getSingleStudent(id , server) {
     const dataToSend = {
         id
     };
-debugger;
+    
     if( server ) {
         response = axios.post('/api/single_student_data', dataToSend);
     } else {
-        debugger;
         response = axios.post("/php_server/single_student.php" , qs.stringify(dataToSend));
     }
 
