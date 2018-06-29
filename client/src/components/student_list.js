@@ -33,7 +33,7 @@ class StudentList extends React.Component {
     }
 
     async toggleUpdate(e, student) {
-        await this.props.getSingleStudent(student.id)
+        await this.props.getSingleStudent(student.id , this.props.node_server)
         this.props.toggleUpdate(this.props , student);
     }
 

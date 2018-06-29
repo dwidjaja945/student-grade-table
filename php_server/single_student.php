@@ -19,11 +19,14 @@ $params = [$id];
 
 $statement = $connection->prepare($query);
 $statement->bind_param("i" , ...$params);
-$result = $statement->execute();
+$statement->execute();
+$result = $statement->get_result();
 
-if( $result > 0 ) {
+if( mysqli_num_rows($result) > 0 ) {
     $output['success'] = true;
-    $output['data'] = $result;
+    while( $row = mysqli_fetch_assoc($result) ){
+        $output['data'][] = $row;
+    }
 } else {
     $output['errors'][] = "error with query - Could not pull single student data";
 };
