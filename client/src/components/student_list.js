@@ -14,13 +14,13 @@ class StudentList extends React.Component {
 
     async getStudentData() {
         await this.props.getStudentList(this.props.node_server);
-        this.props.calculateAverageGrade(this.props.studentList);
+        await this.props.calculateAverageGrade(this.props.studentList);
 
     }
 
     async deleteStudent(id) {
         await this.props.deleteStudent(id , this.props.node_server);
-        this.getStudentData();
+        await this.getStudentData();
     };
     
     displayUpdateModal () {
@@ -32,8 +32,8 @@ class StudentList extends React.Component {
         }
     }
 
-    toggleUpdate(e, student) {
-        this.props.getSingleStudent(student.id , this.props.node_server)
+    async toggleUpdate(e, student) {
+        await this.props.getSingleStudent(student.id , this.props.node_server)
         this.props.toggleUpdate(this.props , student);
     }
 
