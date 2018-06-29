@@ -1,5 +1,4 @@
 <?php
-
 require_once('../config/mysqlCredentials.php');
 
 $output = [
@@ -18,6 +17,7 @@ $query = "
     VALUES (?, ?, ?)";
 
 $params = [$student_name, $class_name, $grade_value];
+
 
 $statement = $connection->prepare($query);
 $statement->bind_param('ssd' , ...$params);

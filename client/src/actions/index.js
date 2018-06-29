@@ -1,8 +1,8 @@
 import types from './types';
 import axios from 'axios';
+import qs from 'qs';
 
 export function getStudentList(server) {
-    debugger;
 
     let response;
     if (server) {
@@ -17,9 +17,15 @@ export function getStudentList(server) {
     };
 };
 
-export function addStudent(student) {
-    const response = axios.post('/api/add_student', student);
-    // const response = axios.post('../../../php_server/add_student.php', student);
+export function addStudent(student , server) {
+    debugger;
+    let response;
+
+    if(server) {
+        response = axios.post('/api/add_student', student);
+    } else {
+        response = axios.post('/php_server/add_student.php' , qs.stringify(student));
+    }
 
     return {
         type: types.ADD_STUDENT,
@@ -128,7 +134,6 @@ export function getSingleStudent(id) {
 }
 
 export function toggleServer(state) {
-    debugger;
     if (state.node_server) {
         return {
             type: types.TOGGLE_SERVER,
