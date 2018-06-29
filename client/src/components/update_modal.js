@@ -35,7 +35,7 @@ class UpdateModal extends React.Component {
         
         await this.props.updateStudent(student , id, this.props.node_server);
         await this.props.getStudentList(this.props.node_server);
-        this.props.calculateAverageGrade(this.props.studentList);
+        await this.props.calculateAverageGrade(this.props.studentList);
         this.removeModal();
         this.clearInput();
     }
