@@ -1,7 +1,6 @@
 <?php
 
 require_once('../config/mysqlCredentials.php');
-
 $output = [
     'success' => false,
     'data' => [],
@@ -9,7 +8,7 @@ $output = [
     'message' => ''
 ];
 
-$id = $_POST['id'];
+$id = $_GET['id'];
 
 $query = "DELETE FROM `grades` WHERE `id` = ?";
 
@@ -26,7 +25,7 @@ if( $result > 0 ) {
     $output['errors'][] = "Could not delete student";
 };
 
-$mysqli_close($connection);
+mysqli_close($connection);
 
 $json_output = json_encode($output);
 

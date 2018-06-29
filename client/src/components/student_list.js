@@ -19,7 +19,7 @@ class StudentList extends React.Component {
     }
 
     async deleteStudent(id) {
-        await this.props.deleteStudent(id);
+        await this.props.deleteStudent(id , this.props.node_server);
         this.getStudentData();
     };
     
