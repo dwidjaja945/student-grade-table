@@ -24,7 +24,6 @@ module.exports = ( webserver , mysql , database ) => {
                         data[i][key] = slashes.strip(data[i][key]);
                     }
                 };
-                console.log( 'query successful' );
                 output.success = true;
                 output.data = data;
                 output.message = "Query was successful";
