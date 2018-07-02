@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import { checkIfGradeIsNumber , checkValidName } from '../helpers';
 import { addStudent, updateInput, clearInput, getStudentList, calculateAverageGrade, toggleUpdate, toggleServer } from "../actions";
 
 class AddStudent extends React.Component {
@@ -26,6 +27,12 @@ class AddStudent extends React.Component {
             class_name
         };
 
+        let validGrade = checkIfGradeIsNumber(grade_value);
+        let validName = checkValidName(student_name);
+        if (!validGrade || !validName) {
+            return;
+        }
+
         await this.props.addStudent(this.student, this.props.node_server);
         this.clearInput();
         await this.props.getStudentList(this.props.node_server);
@@ -44,30 +51,22 @@ class AddStudent extends React.Component {
         this.props.updateInput(name, value);
     }
 
-    checkIfGradeIsNumber(grade) {
-        if (isNaN(grade) || grade > 100) {
-            return (
-                <div className='invalidMessage'>Please enter a valid grade</div>
-            )
-        }
-    }
-
-    checkValidName(studentName) {
-        let regex = studentName.match(/^[a-zA-Z]+[ ]{0,1}[a-zA-Z]*$/);
-
-        if (regex === null && studentName !== "") {
-            return (
-                <div className="invalidMessage" >Please enter a valid name</div>
-            )
-        };
-    }
-
     render() {
         const { student_name, grade_value, class_name } = this.props;
 
-        const invalidGradeMessage = this.checkIfGradeIsNumber(grade_value);
-        const invalidNameMessage = this.checkValidName(student_name);
+        let invalidGradeMessage;
+        let invalidNameMessage;
+        const validGrade = checkIfGradeIsNumber(grade_value);
+        const validName = checkValidName(student_name);
 
+        if (!validGrade) {
+            invalidGradeMessage = (<div className='invalidMessage'>Please enter a valid grade</div>);
+        }
+
+        if (!validName) {
+            invalidNameMessage = (<div className="invalidMessage" >Please enter a valid name</div>);
+        }
+        
         let serverType = "";
         if (this.props.node_server) {
             serverType = "PHP";
