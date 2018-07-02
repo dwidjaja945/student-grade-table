@@ -31,6 +31,12 @@ class UpdateModal extends React.Component {
           return;
         }
 
+        let validGrade = checkIfGradeIsNumber(grade_value);
+        let validName = checkValidName(student_name);
+        if (!validGrade || !validName ) {
+            return;
+        }
+
         const id = this.props.id
         
         await this.props.updateStudent(student , id, this.props.node_server);
@@ -61,8 +67,18 @@ class UpdateModal extends React.Component {
 
         const { edit_student_name , edit_class_name , edit_grade_value } = this.props;
 
-        const invalidGradeMessage = checkIfGradeIsNumber(edit_grade_value);
-        const invalidNameMessage = checkValidName(edit_student_name);
+        let invalidGradeMessage;
+        let invalidNameMessage;
+        const validGrade = checkIfGradeIsNumber(edit_grade_value);
+        const validName = checkValidName(edit_student_name);
+
+        if( !validGrade ) {
+            invalidGradeMessage = (<div className='invalidMessage'>Please enter a valid grade</div>);
+        }
+
+        if( !validName ) {
+            invalidNameMessage = (<div className="invalidMessage" >Please enter a valid name</div>);
+        }
 
         return (
             <div className='modalContainer'>
