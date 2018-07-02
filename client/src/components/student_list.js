@@ -1,28 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UpdateModal from './update_modal';
-import { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate , getSingleStudent } from '../actions';
+import DeleteModal from './delete_modal';
+import { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate , getSingleStudent, toggleDeleteModal } from '../actions';
 
 class StudentList extends React.Component {
     constructor ( props ) {
         super(props);
 
         this.getStudentData();
-        this.deleteStudent = this.deleteStudent.bind(this);
         this.toggleUpdate = this.toggleUpdate.bind(this);
+        this.displayDeleteModal = this.displayDeleteModal.bind(this);
+        this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     };
 
     async getStudentData() {
         await this.props.getStudentList(this.props.node_server);
         await this.props.calculateAverageGrade(this.props.studentList);
-
     }
 
-    async deleteStudent(id) {
-        await this.props.deleteStudent(id , this.props.node_server);
-        await this.getStudentData();
-    };
-    
     displayUpdateModal () {
         const { updateOn } = this.props.updateOn;
         if (updateOn) {
@@ -33,13 +29,22 @@ class StudentList extends React.Component {
     }
 
     async toggleUpdate(e, student) {
-        await this.props.getSingleStudent(student.id , this.props.node_server)
-        this.props.toggleUpdate(this.props , student);
+        await this.props.getSingleStudent(student.id, this.props.node_server)
+        this.props.toggleUpdate(this.props);
     }
 
-    componentDidUpdate(){
-        // this.getStudentData();
+    displayDeleteModal() {
+        const { delete_modal } = this.props;
+        if(delete_modal.on) {
+            return (<DeleteModal />)
+        } else {
+            return <span></span>
+        }
     }
+
+   toggleDeleteModal(id) {
+       this.props.toggleDeleteModal(this.props, id);
+   }
 
     render() {
 
@@ -54,7 +59,7 @@ class StudentList extends React.Component {
                             <button className="btn btn-default" onClick={(id) => this.toggleUpdate(null , item)} >
                                 Edit
                             </button>
-                            <button className="btn btn-default btn-danger" onClick={() => { this.deleteStudent(item.id) }} >
+                            <button className="btn btn-default btn-danger" onClick={() => { this.toggleDeleteModal(item.id) }} >
                             Delete
                             </button>
                         </div>
@@ -72,6 +77,7 @@ class StudentList extends React.Component {
         }
 
         const updateModal = this.displayUpdateModal();
+        const deleteModal = this.displayDeleteModal();
 
         return (
             <div className="pull-left col-lg-8 student-list-container col-xs-12">
@@ -89,6 +95,7 @@ class StudentList extends React.Component {
                     </tbody>
                 </table>
                 <div className="updateModal">{updateModal}</div>
+                <div className="updateModal">{deleteModal}</div>
                 <div className="noData"><h3>{noDataMessage}</h3></div>
             </div>
         );
@@ -99,9 +106,10 @@ function mapStateToProps ( state ) {
     return ({
         studentList : state.studentListReducer.studentList,
         updateOn: state.toggleUpdateReducer.updateOn,
-        node_server: state.toggleServerReducer.node_server
+        node_server: state.toggleServerReducer.node_server,
+        delete_modal: state.toggleDeleteModalReducer.delete_modal
     });
 
 };
 
-export default connect( mapStateToProps , { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate , getSingleStudent } )(StudentList);
+export default connect( mapStateToProps , { getStudentList , deleteStudent , calculateAverageGrade , updateStudent , toggleUpdate , getSingleStudent, toggleDeleteModal } )(StudentList);

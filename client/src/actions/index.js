@@ -161,3 +161,23 @@ export function toggleServer(state) {
         };
     };
 }
+
+export function toggleDeleteModal(state, id) {
+    if( state.delete_modal.on ) {
+        return {
+            type: types.TOGGLE_DELETE_MODAL,
+            payload: {
+                on: false,
+                delete_id: id
+            }
+        };
+    } else {
+        return {
+            type: types.TOGGLE_DELETE_MODAL,
+            payload: {
+                on: true,
+                delete_id: id
+            }
+        }
+    }
+}
