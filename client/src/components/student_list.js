@@ -95,7 +95,7 @@ class StudentList extends React.Component {
                     </tbody>
                 </table>
                 <div className="updateModal">{updateModal}</div>
-                <div className="updateModal">{deleteModal}</div>
+                <div className="deleteModal">{deleteModal}</div>
                 <div className="noData"><h3>{noDataMessage}</h3></div>
             </div>
         );
