@@ -1,14 +1,18 @@
 import React from 'react';
 
 export function checkIfGradeIsNumber(grade) {
-    if (isNaN(grade) || grade > 100) {
-        return false;
-        // return (
-        //     <div className='invalidMessage'>Please enter a valid grade</div>
-        // )
-    } else {
+
+    debugger;
+    if ( grade <= 100 && grade >= 0 && !isNaN(grade) && grade[0] != '-' && !(grade.length > 6) || grade == "" ) {
         return true;
-    }
+    };
+
+    return false;
+
+    // if( grade > 100 || grade < 0 || isNaN(grade) || grade[0] == '-' ) {
+    //     return false;
+    // };
+    // return true;
 }
 
 export function checkValidName(studentName) {
@@ -19,7 +23,7 @@ export function checkValidName(studentName) {
         // return (
         //     <div className="invalidMessage" >Please enter a valid name</div>
         // )
-    } else {
-        return true;
-    }
+    };
+
+    return true;
 }
