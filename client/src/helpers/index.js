@@ -2,7 +2,6 @@ import React from 'react';
 
 export function checkIfGradeIsNumber(grade) {
 
-    debugger;
     if ( grade <= 100 && grade >= 0 && !isNaN(grade) && grade[0] != '-' && !(grade.length > 6) || grade == "" ) {
         return true;
     };
