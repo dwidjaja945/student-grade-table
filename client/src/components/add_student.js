@@ -109,9 +109,9 @@ class AddStudent extends React.Component {
                     Cancel
               </button>
             </div>
-            <button onClick={() => { this.props.toggleServer(this.props) }} type="button" className="btn btn-default btn-primary toggleServer">
+            {/* <button onClick={() => { this.props.toggleServer(this.props) }} type="button" className="btn btn-default btn-primary toggleServer">
                 Click for {serverType} Server
-            </button>
+            </button> */}
         </div>;
     }
 }
