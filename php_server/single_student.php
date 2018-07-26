@@ -25,6 +25,10 @@ $result = $statement->get_result();
 if( mysqli_num_rows($result) > 0 ) {
     $output['success'] = true;
     while( $row = mysqli_fetch_assoc($result) ){
+        foreach($row as $key => $item) {
+            $row[$key] = stripslashes($item);
+        };
+        
         $output['data'][] = $row;
     }
 } else {

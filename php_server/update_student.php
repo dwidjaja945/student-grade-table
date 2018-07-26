@@ -10,9 +10,9 @@ $output = [
 ];
 
 $id = $_POST['id'];
-$student_name = $_POST['student_name'];
-$grade_value = $_POST['grade_value'];
-$class_name = $_POST['class_name'];
+$student_name = addslashes($_POST['student_name']);
+$grade_value = addslashes($_POST['grade_value']);
+$class_name = addslashes($_POST['class_name']);
 
 $query = "
     UPDATE grades
