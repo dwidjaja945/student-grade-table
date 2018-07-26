@@ -23,6 +23,12 @@ if($result){
         $output['success'] = true;
         // As long as there is data
         while( $row = mysqli_fetch_assoc($result) ) {
+            
+            // remove slashes from database
+            foreach($row as $key => $item) {
+                $row[$key] = stripslashes($item);
+            };
+
             // push into output data array
             $output['data'][] = $row;
         };
