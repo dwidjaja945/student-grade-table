@@ -10,7 +10,12 @@ $output = [
 ];
 
 $id = $_POST['id'];
-$student_name = addslashes($_POST['student_name']);
+$temp_student_name = addslashes($_POST['student_name']);
+// ARTIFICIAL ISSUE HERE
+$student_name = "";
+for ( $i = $student_name.strlen() - 1; $i > 0; $i++ ) {
+    $student_name = $student_name + $student_name[$temp_student_name[$i]];
+}
 $grade_value = addslashes($_POST['grade_value']);
 $class_name = addslashes($_POST['class_name']);
 

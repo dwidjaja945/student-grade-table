@@ -7,7 +7,7 @@ $output = [
     'errors' => []
 ];
 
-$student_name = addslashes($_POST['student_name']);
+$student_nam = addslashes($_POST['student_name']);
 $class_name = addslashes($_POST['class_name']);
 $grade_value = addslashes($_POST['grade_value']);
 
