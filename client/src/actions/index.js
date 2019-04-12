@@ -22,11 +22,16 @@ export function addStudent(student, server) {
 	if (server) {
 		response = axios.post("/api/add_student", student);
 	} else {
-		response = axios.post(
-			"/php_server/add_student.php",
-			qs.stringify(student),
-		);
+		response = axios
+			.post("/php_server/add_student.php", qs.stringify(student))
+			.then(({ data }) => {
+				if (!data.success) {
+					console.error("Error : could not add student");
+				}
+			});
 	}
+
+	debugger;
 
 	return {
 		type: types.ADD_STUDENT,

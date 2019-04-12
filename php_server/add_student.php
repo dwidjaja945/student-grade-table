@@ -30,6 +30,7 @@ if($result > 0) {
     $output['data'] = $result;
 } else {
     $output['errors'][] = "error with query - Could not add student";
+    header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
 }
 
 mysqli_close($connection);
